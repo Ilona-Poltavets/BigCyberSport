@@ -6,13 +6,13 @@ $('document').ready(function () {
         rowText =
             `<tr>
                 <td>${row.name}</td>
-                <td class="right-align">
-                    <a class="btn-floating waves-effect waves-light blue" href="team.html?name=${row.name}">
+                <td class="has-text-right">
+                    <a class="button is-link p-2" href="team.html?name=${row.name}">
                         <i class="material-icons">edit</i>
                     </a>
-                    <a rowid="${row.name}" class="rem-row btn-floating waves-effect waves-light red">
+                    <button type="button" rowid="${row.name}" class="button is-danger rem-row p-2">
                         <i class="material-icons">delete</i>
-                    </a>
+                    </button>
                 </td>
                </tr>`;
         content.append(rowText);
