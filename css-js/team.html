@@ -5,13 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="node_modules/foundation-sites/dist/css/foundation.min.css">
-    <!--link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"-->
-    <!--link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css"-->
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="node_modules/material-icons/iconfont/material-icons.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <!--script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script-->
-    <!--script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script-->
-    <script src="node_modules/foundation-sites/dist/js/foundation.min.js"></script>
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="my.js"></script>
     <script src="data.js"></script>
     <script src="team.js"></script>
@@ -23,32 +20,35 @@
     </style>
 </head>
 <body>
-<div class="top-bar">
-    <div class="top-bar-left primary">
-        <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text" id="navTitle"></li>
-        </ul>
+<nav>
+    <div class="nav-wrapper">
+        <a class="brand-logo" id="navTitle"></a>
     </div>
-</div>
-<a class="button secondary" href="index.html">Back</a>
-<div class="row">
-    <div class="columns">
+</nav>
+<div class="container">
+    <div class="col m6 offset-m3 s12 left-align" style="margin-top: 20px;">
+        <a class="btn-floating btn-large waves-effect waves-effect waves-light grey" href="index.html"><i class="material-icons">arrow_back</i></a>
+    </div>
+    <div class="row">
         <form>
-            <label>Name:
-                <input type="text" id="name" placeholder="Name team">
-            </label>
-            <label>Discipline:
-                <input type="text" id="discipline" placeholder="discipline">
-            </label>
-            <label>Coach:
-                <input type="text" id="coach" placeholder="coach">
-            </label>
-            <button type="button" id="save" class="button primary">Save</button>
+            <div class="input-field col s12">
+                <input type="text" class="validate" id="name" placeholder="Name team">
+                <label for="name">Name:</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" class="validate" id="discipline" placeholder="discipline">
+                <label for="discipline">Discipline:</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" class="validate" id="coach" placeholder="coach">
+                <label for="coach">Coach:</label>
+            </div>
+            <div class="input-field col s12 right-align">
+                <a id="save" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">done</i>
+                </a>
+            </div>
         </form>
     </div>
 </div>
-<script>
-    $(document).foundation();
-</script>
 </body>
 </html>

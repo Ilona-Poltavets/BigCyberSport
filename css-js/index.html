@@ -5,54 +5,47 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="node_modules/foundation-sites/dist/css/foundation.min.css">
-    <link rel="stylesheet" href="node_modules/@icon/foundation-icons/foundation-icons.css">
-    <!--link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"-->
-    <!--link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css"-->
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="node_modules/material-icons/iconfont/material-icons.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/foundation-sites/dist/js/foundation.min.js"></script>
-    <!--script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script-->
-    <!--script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script-->
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="my.js"></script>
     <script src="data.js"></script>
     <title>Big CyberSport</title>
     <style>
-        .row{
-            margin:10px;
+        .row {
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-<div class="top-bar">
-    <div class="top-bar-left primary">
-        <ul class="drilldown menu" data-dropdown-menu>
-            <li class="menu-text">Teams</li>
-        </ul>
+<nav>
+    <div class="nav-wrapper">
+        <a class="brand-logo">Teams</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col m6 offset-m3 s12">
+            <a href="team.html" class="btn-floating btn-large waves-effect waves-effect waves-light green">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m6 offset-m3 s12 no-padding">
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th style="width: 60%">Team</th>
+                    <th style="width: 40%"></th>
+                </tr>
+                </thead>
+                <tbody id="teams">
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="columns">
-        <a class="button success" href="team.html">
-            <i class="fi fi-plus"></i>
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="columns">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col" style="width: 60%">Team</th>
-                <th scope="col" style="width: 40%"></th>
-            </tr>
-            </thead>
-            <tbody id="teams">
-            </tbody>
-        </table>
-    </div>
-</div>
-<script>
-    $(document).foundation();
-</script>
 </body>
 </html>
