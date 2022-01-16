@@ -5,64 +5,42 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="node_modules/material-icons/iconfont/material-icons.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="my.js"></script>
     <script src="data.js"></script>
     <title>Big CyberSport</title>
 </head>
 <body>
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Teams</ion-title>
-    </ion-toolbar>
-</ion-header>
-<section id="main">
-    <ion-grid>
-        <ion-row>
-            <ion-col size="12" size-md="6" offset-md="3">
-                <ion-button id="add" color="success" size="large">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col size="12" size-md="6" offset-md="3">
-                <ion-list id="list">
-                    <ion-list-header>
-                        <ion-label>Team</ion-label>
-                    </ion-list-header>
-                </ion-list>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-</section>
-<section id="edit">
-    <ion-grid>
-        <ion-row>
-            <ion-col size="12" size-md="6" offset-md="3">
-                <ion-button id="back" color="dark" size="medium" float-right style="margin-top: 20px;">
-                    <ion-icon name="arrow-back-outline"></ion-icon>
-                </ion-button>
-                <ion-item>
-                    <ion-label position="floating">Name:</ion-label>
-                    <ion-input id="name"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label position="floating">Discipline:</ion-label>
-                    <ion-input id="discipline"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label position="floating">Coach:</ion-label>
-                    <ion-input id="coach"></ion-input>
-                </ion-item>
-                <ion-button id="save" color="primary" size="medium" float-right style="margin-top: 20px;">
-                    <ion-icon name="checkmark"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-</section>
+<nav>
+    <div class="nav-wrapper" style="background-color: #212121">
+        <a class="brand-logo">Teams</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row" style="margin-top: 20px">
+        <div class="col m6 offset-m3 s12">
+            <a href="team.html" class="bnt-floating btn-large waves-effect waves-light green">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m6 offset-m3 s12 no-padding">
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th style="width: 60%">Name</th>
+                    <th style="width: 40%"></th>
+                </tr>
+                </thead>
+                <tbody id="teams">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
