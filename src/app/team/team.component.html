@@ -1,11 +1,29 @@
 <div class="team">
-  <img [src]="curImage">
+  <div class="img-container">
+    <button (click)="changeCurImage(false)"><< prev</button>
+    <button (click)="changeCurImage(true)">next >></button>
+    <div>
+      <img [src]="curImage">
+    </div>
+  </div>
   <h3>{{name}}</h3>
-  <p class="discipline">{{discipline}}</p>
-  <p class="coach">{{coach}}</p>
+  <div *ngIf="showInfo; then btnHide else btnShow"></div>
+  <ng-template #btnHide>
+    <button (click)="showInfo=false">Close</button>
+  </ng-template>
+  <ng-template #btnShow>
+    <button (click)="showInfo=true">Info</button>
+  </ng-template>
+  <div class="info" *ngIf="showInfo">
+    <div class="edit-name">
+      <input type="text" [(ngModel)]="name"/>
+    </div>
+    <p class="discipline">{{discipline}}</p>
+    <p class="coach">{{coach}}</p>
 
-  <p>Players Quantity: {{playerQuantity}}</p>
-  <p>Roster: {{players}}</p>
-  <p>Captain:</p>
-  <pre>{{captain|json}}</pre>
+    <p>Players Quantity: {{playerQuantity}}</p>
+    <p>Roster: {{players}}</p>
+    <p>Captain:</p>
+    <pre>{{captain | json}}</pre>
+  </div>
 </div>

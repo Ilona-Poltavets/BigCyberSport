@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'BigCyberSport';
+  teams = [
+    {
+      name: 'NaVi',
+      discipline: 'CS:GO',
+      coach: 'Andrey \'B1ad3\' Gorodenskiy',
+      playerQuantity: 5
+    },
+    {
+      name: 'Gambit',
+      discipline: 'CS:GO',
+      coach: 'Konstantin \'groove\' Pikiner',
+      playerQuantity: 5
+    }
+  ]
 }

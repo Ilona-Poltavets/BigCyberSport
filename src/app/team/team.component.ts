@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-team',
@@ -6,11 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-  name = 'NaVi';
-  discipline = 'CS:GO';
-  coach = 'Andrey \'B1ad3\' Gorodenskiy';
+  @Input() team:any;
+  showInfo=false;
 
-  playerQuantity = 6;
   players = [
     'Aleksandr \'s1mple\' Kostyliev',
     'Denis \'electroNic\' Sharipov',
@@ -18,7 +16,7 @@ export class TeamComponent implements OnInit {
     'Ilya \'Perfecto\' Zalutskiy',
     'Valeriy \'b1t\' Vakhovskiy',
   ];
-  captain = {
+  captain: Object = {
     name: 'Kirill Mikhailov',
     nik: 'Boombl4',
     age: 23,
@@ -29,20 +27,36 @@ export class TeamComponent implements OnInit {
     'assets/2.jpg',
     'assets/3.jpg'
   ];
-  curIndexIndex = 0;
-  curImage;
+  curImageIndex = 0;
+  curImage!: string;
 
   constructor() {
   }
 
+  changeCurImage(forward: boolean) {
+    if (forward) {
+      this.curImageIndex++;
+    } else {
+      this.curImageIndex--;
+    }
+    if (this.curImageIndex >= this.images.length) {
+      this.curImageIndex = 0;
+    }
+    if (this.curImageIndex < 0) {
+      this.curImageIndex = this.images.length - 1;
+    }
+    this.curImage = this.images[this.curImageIndex];
+  }
+
   ngOnInit() {
-    this.curImage = this.images[this.curIndexIndex];
-    setTimeout(() => {
-      this.curIndexIndex++;
-      if (this.curIndexIndex >= this.images.length) {
-        this.curIndexIndex = 0;
-      }
-      this.curImage = this.images[this.curIndexIndex];
-    }, 2000);
+    this.curImage = this.images[this.curImageIndex];
+    setInterval(() => {
+      this.changeCurImage(true);
+    }, 10000);
+
+    //setTimeout(() => {
+    // this.discipline = "";
+    //  this.coach = "";
+    //}, 2000);
   }
 }
