@@ -5,13 +5,15 @@ import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { TeamComponent } from './team/team.component';
+import { NewTeamComponent } from './new-team/new-team.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamComponent,
     TeamComponent,
-    TeamComponent
+    TeamComponent,
+    NewTeamComponent
   ],
   imports: [
     BrowserModule,

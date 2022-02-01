@@ -1,29 +1,51 @@
-<div class="team">
-  <div class="img-container">
+<div class="row">
+  <!--<div class="img-container">
     <button (click)="changeCurImage(false)"><< prev</button>
     <button (click)="changeCurImage(true)">next >></button>
     <div>
       <img [src]="curImage">
     </div>
+  </div>-->
+  <div class="col m3 s6 offset-m3 center-align">
+    <h5>{{team.name}}</h5>
   </div>
-  <h3>{{name}}</h3>
-  <div *ngIf="showInfo; then btnHide else btnShow"></div>
-  <ng-template #btnHide>
-    <button (click)="showInfo=false">Close</button>
-  </ng-template>
-  <ng-template #btnShow>
-    <button (click)="showInfo=true">Info</button>
-  </ng-template>
-  <div class="info" *ngIf="showInfo">
-    <div class="edit-name">
-      <input type="text" [(ngModel)]="name"/>
-    </div>
-    <p class="discipline">{{discipline}}</p>
-    <p class="coach">{{coach}}</p>
-
-    <p>Players Quantity: {{playerQuantity}}</p>
-    <p>Roster: {{players}}</p>
-    <p>Captain:</p>
-    <pre>{{captain | json}}</pre>
+  <div class="col m3 s6 center-align">
+    <a class="btn-floating waves-effect waves-light blue" (click)="showInfo=!showInfo">
+      <i *ngIf="showInfo" class="material-icons">keyboard_arrow_up</i>
+      <i *ngIf="!showInfo" class="material-icons">keyboard_arrow_down</i>
+    </a>
   </div>
 </div>
+<div class="row info" *ngIf="showInfo">
+  <div class="col m6 offset-m3 s12">
+    <div class="input-field">
+      <input id="name" [(ngModel)]="team.name" type="text" class="validate">
+      <label for="name" class="active">Name</label>
+    </div>
+    <div class="input-field">
+      <input id="discipline" [(ngModel)]="team.discipline" type="text" class="validate">
+      <label for="discipline" class="active">Discipline</label>
+    </div>
+    <div class="input-field">
+      <input id="coach" [(ngModel)]="team.coach" type="text" class="validate">
+      <label for="coach" class="active">Coach</label>
+    </div>
+    <div class="input-field">
+      <input id="playerQuantity" [(ngModel)]="team.playerQuantity" type="text" class="validate">
+      <label for="playerQuantity" class="active">Player quantity</label>
+    </div>
+    <a class="rem-row btn-floating waves-effect waves-light red">
+      <i class="material-icons">delete</i>
+    </a>
+  </div>
+</div>
+<!--<div class="edit-name">
+  <input type="text" [(ngModel)]="team.name" (ngModelChange)="onChangeName()"/>
+</div>
+<p class="discipline">{{team.discipline}}</p>
+<p class="coach">{{team.coach}}</p>
+
+<p>Players Quantity: {{team.playerQuantity}}</p>
+<p>Roster: {{players}}</p>
+<p>Captain:</p>
+<pre>{{captain | json}}</pre>-->

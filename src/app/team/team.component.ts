@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-team',
@@ -6,8 +6,9 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-  @Input() team:any;
-  showInfo=false;
+  @Input() team: any;
+  @Output() onTeamNameEdit = new EventEmitter();
+  showInfo = false;
 
   players = [
     'Aleksandr \'s1mple\' Kostyliev',
@@ -31,6 +32,10 @@ export class TeamComponent implements OnInit {
   curImage!: string;
 
   constructor() {
+  }
+
+  onChangeName() {
+    this.onTeamNameEdit.emit(new Date());
   }
 
   changeCurImage(forward: boolean) {

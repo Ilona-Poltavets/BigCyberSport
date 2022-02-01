@@ -7,6 +7,12 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'BigCyberSport';
+  lastChangeDate = new Date();
+
+  onDataChange(event: any) {
+    this.lastChangeDate = event;
+  }
+
   teams = [
     {
       name: 'NaVi',

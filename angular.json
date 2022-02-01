@@ -31,9 +31,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/material-icons/css/material-icons.min.css",
+              "node_modules/materialize-css/dist/css/materialize.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/materialize-css/dist/js/materialize.min.js"
+            ]
           },
           "configurations": {
             "production": {
