@@ -14,5 +14,5 @@
   <p>
     <span>{{lastChangeDate|date:'dd.MM.yyyy HH:mm:ss'}}</span>
   </p>
-  <app-team *ngFor="let team of teams" [team]="team"></app-team>
+  <app-team *ngFor="let team of teams" [team]="team" (onTeamNameEdit)="onDataChange($event)"></app-team>
 </div>
