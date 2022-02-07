@@ -7,12 +7,6 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'BigCyberSport';
-  lastChangeDate = new Date();
-
-  onDataChange(event: any) {
-    this.lastChangeDate = event;
-  }
-
   teams = [
     {
       name: 'NaVi',
@@ -27,4 +21,10 @@ export class AppComponent {
       playerQuantity: 5
     }
   ]
+  addTeam(team:any){
+    this.teams.push(team);
+  }
+  deleteTeam(index:number){
+    this.teams.splice(index,1);
+  }
 }

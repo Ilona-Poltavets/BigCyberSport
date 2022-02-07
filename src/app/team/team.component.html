@@ -1,11 +1,4 @@
 <div class="row">
-  <!--<div class="img-container">
-    <button (click)="changeCurImage(false)"><< prev</button>
-    <button (click)="changeCurImage(true)">next >></button>
-    <div>
-      <img [src]="curImage">
-    </div>
-  </div>-->
   <div class="col m3 s6 offset-m3 center-align">
     <h5>{{team.name}}</h5>
   </div>
@@ -34,7 +27,7 @@
       <input id="playerQuantity" [(ngModel)]="team.playerQuantity" type="text" class="validate">
       <label for="playerQuantity" class="active">Player quantity</label>
     </div>
-    <a class="rem-row btn-floating waves-effect waves-light red">
+    <a class="rem-row btn-floating waves-effect waves-light red" (click)="delTeam()">
       <i class="material-icons">delete</i>
     </a>
   </div>

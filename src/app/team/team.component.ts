@@ -7,10 +7,21 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class TeamComponent implements OnInit {
   @Input() team: any;
-  @Output() onTeamNameEdit = new EventEmitter();
+  @Input()tmIndex!:number;
+  @Output()removeTeam=new EventEmitter();
+
   showInfo = false;
 
-  players = [
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
+  delTeam(){
+    this.removeTeam.emit(this.tmIndex);
+  }
+  /*players = [
     'Aleksandr \'s1mple\' Kostyliev',
     'Denis \'electroNic\' Sharipov',
     'Kirill \'Boombl4\' Mikhailov',
@@ -29,39 +40,5 @@ export class TeamComponent implements OnInit {
     'assets/3.jpg'
   ];
   curImageIndex = 0;
-  curImage!: string;
-
-  constructor() {
-  }
-
-  onChangeName() {
-    this.onTeamNameEdit.emit(new Date());
-  }
-
-  changeCurImage(forward: boolean) {
-    if (forward) {
-      this.curImageIndex++;
-    } else {
-      this.curImageIndex--;
-    }
-    if (this.curImageIndex >= this.images.length) {
-      this.curImageIndex = 0;
-    }
-    if (this.curImageIndex < 0) {
-      this.curImageIndex = this.images.length - 1;
-    }
-    this.curImage = this.images[this.curImageIndex];
-  }
-
-  ngOnInit() {
-    this.curImage = this.images[this.curImageIndex];
-    setInterval(() => {
-      this.changeCurImage(true);
-    }, 10000);
-
-    //setTimeout(() => {
-    // this.discipline = "";
-    //  this.coach = "";
-    //}, 2000);
-  }
+  curImage!: string;*/
 }

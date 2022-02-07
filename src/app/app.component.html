@@ -4,15 +4,7 @@
   </div>
 </nav>
 <div class="container">
-  <div class="row" style="margin-top: 20px">
-    <div class="col m6 offset-m3 s12">
-      <a class="btn-floating btn-large waves-effect waves-light green">
-        <i class="material-icons">add</i>
-      </a>
-    </div>
-  </div>
-  <p>
-    <span>{{lastChangeDate|date:'dd.MM.yyyy HH:mm:ss'}}</span>
-  </p>
-  <app-team *ngFor="let team of teams" [team]="team" (onTeamNameEdit)="onDataChange($event)"></app-team>
+  <app-new-team (team)="addTeam($event)"></app-new-team>
+  <app-team *ngFor="let team of teams;let i=index" [team]="team" [tmIndex]="i"
+            (removeTeam)="deleteTeam($event)"></app-team>
 </div>
