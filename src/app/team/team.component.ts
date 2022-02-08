@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TeamsDataService} from "../services/teams-data.service";
 
 @Component({
   selector: 'app-team',
@@ -8,37 +9,15 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class TeamComponent implements OnInit {
   @Input() team: any;
   @Input()tmIndex!:number;
-  @Output()removeTeam=new EventEmitter();
 
   showInfo = false;
 
-  constructor() {
-  }
+  constructor(private teamDataService:TeamsDataService) {}
 
   ngOnInit() {
   }
 
   delTeam(){
-    this.removeTeam.emit(this.tmIndex);
+    this.teamDataService.deleteTeam(this.tmIndex);
   }
-  /*players = [
-    'Aleksandr \'s1mple\' Kostyliev',
-    'Denis \'electroNic\' Sharipov',
-    'Kirill \'Boombl4\' Mikhailov',
-    'Ilya \'Perfecto\' Zalutskiy',
-    'Valeriy \'b1t\' Vakhovskiy',
-  ];
-  captain: Object = {
-    name: 'Kirill Mikhailov',
-    nik: 'Boombl4',
-    age: 23,
-  };
-
-  images = [
-    'assets/1.jpg',
-    'assets/2.jpg',
-    'assets/3.jpg'
-  ];
-  curImageIndex = 0;
-  curImage!: string;*/
 }

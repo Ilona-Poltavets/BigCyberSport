@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col m6 offset-m3 s12" *ngIf="!showForm">
-    <a (click)="showForm=true" class="btn-floating btn-large waves-effect waves-light green">
+    <a (click)="showForm=true" class="btn-floating btn-large waves-effect waves-light green accent-4">
       <i class="material-icons">add</i>
     </a>
   </div>
   <div class="col m6 offset-m3 s12 my-form" *ngIf="showForm">
     <form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
-      <h5>New team</h5>
+      <h5 class="center-align">New team</h5>
       <div class="input-field">
         <input id="name" name="name" ngModel required type="text">
         <label for="name">Name</label>

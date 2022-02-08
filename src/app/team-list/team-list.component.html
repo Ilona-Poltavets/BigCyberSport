@@ -1,0 +1,6 @@
+<h5 class="center-align">Team List</h5>
+<app-new-team></app-new-team>
+<app-team
+  *ngFor="let team of teams;let i=index"
+  [team]="team" [tmIndex]="i">
+</app-team>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col m3 s6 offset-m3 center-align">
+      <p>{{player.name}} | "{{player.nik}}"</p>
+    </div>
+    <div class="col m3 s6 center-align">
+      <a class="btn-floating waves-effect waves-light blue" (click)="showInfo=!showInfo">
+        <i *ngIf="showInfo" class="material-icons">keyboard_arrow_up</i>
+        <i *ngIf="!showInfo" class="material-icons">keyboard_arrow_down</i>
+      </a>
+    </div>
+  </div>
+  <div class="row info" *ngIf="showInfo">
+    <div class="col m6 offset-m3 s12">
+      <div class="input-field">
+        <input id="name" [(ngModel)]="player.name" type="text" class="validate">
+        <label for="name" class="active">Name</label>
+      </div>
+      <div class="input-field">
+        <input id="nik" [(ngModel)]="player.nik" type="text" class="nik">
+        <label for="nik" class="active">Nickname</label>
+      </div>
+      <a class="rem-row btn-floating waves-effect waves-light red" (click)="delPlayer()">
+        <i class="material-icons">delete</i>
+      </a>
+    </div>
+  </div>
+</div>

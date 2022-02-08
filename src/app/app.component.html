@@ -1,10 +1,10 @@
 <nav>
-  <div class="nav-wrapper">
-    <a class="brand-logo">{{title}}</a>
+  <div class="nav-wrapper indigo darken-4">
+    <a class="brand-logo center">{{title}}</a>
   </div>
 </nav>
-<div class="container">
-  <app-new-team (team)="addTeam($event)"></app-new-team>
-  <app-team *ngFor="let team of teams;let i=index" [team]="team" [tmIndex]="i"
-            (removeTeam)="deleteTeam($event)"></app-team>
+<div class="collection center-align">
+  <a routerLink="/home" class="collection-item blue darken-4 white-text">HOME</a>
+  <a routerLink="/teams" class="collection-item blue darken-4 white-text">Teams</a>
 </div>
+<router-outlet></router-outlet>

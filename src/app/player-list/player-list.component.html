@@ -1,0 +1,9 @@
+<a [routerLink]="'../../teams'" class="btn-floating waves-effect waves-light blue-grey">
+  <i class="material-icons">keyboard_arrow_left</i>
+</a>
+<h5 class="center-align">Players {{name}}</h5>
+<app-player
+  *ngFor="let player of players"
+  [player]="player" [nik]="player.nik">
+</app-player>
+<app-new-player [countPlayers]="players.length" [team]="name"></app-new-player>

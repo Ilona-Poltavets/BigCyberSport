@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {TeamsDataService} from "./services/teams-data.service";
 
 @Component({
   selector: 'app-root',
@@ -7,24 +8,13 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'BigCyberSport';
-  teams = [
-    {
-      name: 'NaVi',
-      discipline: 'CS:GO',
-      coach: 'Andrey \'B1ad3\' Gorodenskiy',
-      playerQuantity: 5
-    },
-    {
-      name: 'Gambit',
-      discipline: 'CS:GO',
-      coach: 'Konstantin \'groove\' Pikiner',
-      playerQuantity: 5
-    }
-  ]
-  addTeam(team:any){
-    this.teams.push(team);
-  }
-  deleteTeam(index:number){
-    this.teams.splice(index,1);
+  teams!: any[];
+
+  options = {
+    menuWidth: 300, // Default is 240
+    edge: 'right' // Choose the horizontal origin
+  };
+
+  constructor() {
   }
 }
