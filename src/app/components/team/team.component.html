@@ -1,0 +1,32 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" [(ngModel)]="team.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Discipline</ion-label>
+      <ion-input type="text" [(ngModel)]="team.discipline" name="discipline"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Coach</ion-label>
+      <ion-input type="text" [(ngModel)]="team.coach" name="coach"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Player quantity</ion-label>
+      <ion-input type="number" [(ngModel)]="team.playerQuantity" name="playerQuantity"></ion-input>
+    </ion-item>
+    <ion-button *ngIf="isNew" color="primary" (click)="addNew()">
+      <ion-icon slot="start" name="add-circle"></ion-icon>
+      Add
+    </ion-button>
+    <ion-button *ngIf="isNew" color="danger" class="ion-float-right" (click)="cancelAdding()">
+      <ion-icon slot="start" name="close"></ion-icon>
+      Cancel
+    </ion-button>
+  </ion-card-content>
+</ion-card>
