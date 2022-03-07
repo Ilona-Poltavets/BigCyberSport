@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataGetterService} from "../service/data-getter.service";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-login',

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Players {{team.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Squad</ion-label>
+      <ion-button shape="round" fill="outline" color="success" (click)="add()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Add
+      </ion-button>
+    </ion-list-header>
+    <app-player (addPlayer)="addPlayer($event)" (cancelAddingPlayer)="showNew=false" *ngIf="showNew"
+                [isNew]="true"></app-player>
+    <div *ngFor="let player of players; let i=index">
+      <ion-item-sliding>
+        <ion-item-options side="start">
+          <ion-item-option color="primary" (click)="showEdit=i">
+            <ion-icon name="create"></ion-icon>
+            Edit
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="delete(player.id)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item (click)="showEdit=-1">
+          <ion-icon [name]="player.isCap===true ? 'star' : 'shield'"></ion-icon>
+          <ion-label text-wrap>{{player.name}} "{{player.nikname}}" {{player.surname}}</ion-label>
+          <ion-note slot="end">{{player.age}}</ion-note>
+        </ion-item>
+      </ion-item-sliding>
+      <app-player *ngIf="showEdit===i" [isNew]="false" [player]="player"></app-player>
+    </div>
+  </ion-list>
+</ion-content>

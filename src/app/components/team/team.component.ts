@@ -20,6 +20,7 @@ export class TeamComponent implements OnInit {
   ngOnInit() {
     if (this.isNew) {
       this.team = {
+        id: null,
         name: '',
         discipline: '',
         coach: '',

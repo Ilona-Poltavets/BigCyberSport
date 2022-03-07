@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>DataSender</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">
+      Data from/to home page
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="textData"></ion-input>
+  </ion-item>
+  <ion-button color="primary" class="ion-float-right" (click)="sendDataToHome()">
+    <ion-icon slot="start" name="send"></ion-icon>
+    Send
+  </ion-button>
+</ion-content>

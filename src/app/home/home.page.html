@@ -40,8 +40,21 @@
           <ion-note slot="end">{{team.discipline}}</ion-note>
           <ion-note slot="end">{{team.coach}}</ion-note>
         </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="secondary" routerLink="/players/{{team.id}}" routerDirection="forward">
+            <ion-icon name="reorder"></ion-icon>
+            Players
+          </ion-item-option>
+        </ion-item-options>
       </ion-item-sliding>
       <app-team *ngIf="showEdit===i" [isNew]="false" [team]="team"></app-team>
     </div>
   </ion-list>
+  <ion-item text-center>
+    <ion-input type="text" [(ngModel)]="extraData"></ion-input>
+  </ion-item>
+  <ion-button color="primary" class="ion-float-right" (click)="sendData()">
+    <ion-icon slot="start" name="send"></ion-icon>
+    Send
+  </ion-button>
 </ion-content>
