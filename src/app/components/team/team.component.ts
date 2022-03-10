@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Team} from "../../service/data-getter.service";
+import {DataGetterService, Team} from "../../service/data-getter.service";
 
 @Component({
   selector: 'app-team',
@@ -12,9 +12,10 @@ export class TeamComponent implements OnInit {
   @Input() isNew: boolean;
   @Output() addTeam = new EventEmitter();
   @Output() cancelAddingTeam = new EventEmitter();
+  @Output() cancelEditingTeam = new EventEmitter();
   title: string;
 
-  constructor() {
+  constructor(private dataGetter: DataGetterService) {
   }
 
   ngOnInit() {
@@ -36,9 +37,16 @@ export class TeamComponent implements OnInit {
     }
   }
 
+  saveTeam() {
+    this.dataGetter.editTeam(this.team).subscribe(data => console.log(data));
+  }
+
   cancelAdding() {
     if (this.isNew) {
       this.cancelAddingTeam.emit();
+    }
+    if (!this.isNew) {
+      this.cancelEditingTeam.emit();
     }
   }
 }

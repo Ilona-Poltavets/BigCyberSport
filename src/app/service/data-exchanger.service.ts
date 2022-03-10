@@ -15,7 +15,6 @@ export class DataExchangerService {
   }
 
   getData(): string {
-    console.log(this.data);
     return this.data;
   }
 }

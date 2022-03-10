@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
+import {HttpClient} from '@angular/common/http';
 
 export interface Team {
   id: number;
@@ -20,127 +21,47 @@ export interface Player {
   teamId: number;
 }
 
+export interface User {
+  id: number;
+  username: string;
+  password: string;
+  roleId: number;
+  token: string;
+}
+
+export interface Role {
+  id: number;
+  name: string;
+  permissions: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataGetterService {
+  baseUrl = 'http://localhost/API/';
+  teams = [];
+  players = [];
+  users = [];
+
   private userName = this.cookieService.get('user');
+  private token = this.cookieService.get('token');
 
-  private users = [
-    'admin', 'John', 'Anna'
-  ];
+  constructor(private cookieService: CookieService, private http: HttpClient) {
+  }
 
-  private teams: Team[] = [
-    {
-      id: 1,
-      name: 'NaVi',
-      discipline: 'CS:GO',
-      coach: 'Andrey \'B1ad3\' Gorodenskiy',
-      playerQuantity: 5
-    },
-    {
-      id: 2,
-      name: 'Gambit',
-      discipline: 'CS:GO',
-      coach: 'Konstantin \'groove\' Pikiner',
-      playerQuantity: 5
-    },
-  ];
+  /*
+  |--------------------------------------------------------------------------
+  | Auth
+  |--------------------------------------------------------------------------
+  */
+  checkUser(user) {
+    return this.http.post<any>(this.baseUrl + '?action=login', user);
+  }
 
-  private players = [
-    {
-      id: 1,
-      name: 'Alexandr',
-      nikname: 's1mple',
-      surname: 'Kostylev',
-      age: 24,
-      isCap: false,
-      teamId: 1
-    },
-    {
-      id: 2,
-      name: 'Denis',
-      nikname: 'electroNic',
-      surname: 'Sharipov',
-      age: 23,
-      isCap: false,
-      teamId: 1
-    },
-    {
-      id: 3,
-      name: 'Kirill',
-      nikname: 'BoombI4',
-      surname: 'Mikhailov',
-      age: 23,
-      isCap: true,
-      teamId: 1
-    },
-    {
-      id: 4,
-      name: 'Ilya',
-      nikname: 'Perfecto',
-      surname: 'Zalutskiy',
-      age: 22,
-      isCap: false,
-      teamId: 1
-    },
-    {
-      id: 5,
-      name: 'Abay',
-      nikname: 'HObbit',
-      surname: 'Khasenov',
-      age: 27,
-      isCap: false,
-      teamId: 2
-    },
-    {
-      id: 6,
-      name: 'Valeriy',
-      nikname: 'b1t',
-      surname: 'Vakhovskiy',
-      age: 19,
-      isCap: false,
-      teamId: 1
-    },
-    {
-      id: 7,
-      name: 'Dmitry',
-      nikname: 'sh1ro',
-      surname: 'Sokolov',
-      age: 20,
-      isCap: false,
-      teamId: 2
-    },
-    {
-      id: 8,
-      name: 'Timofey',
-      nikname: 'interz',
-      surname: 'Yakushin',
-      age: 21,
-      isCap: false,
-      teamId: 2
-    },
-    {
-      id: 9,
-      name: 'Sergey',
-      nikname: 'Ax1Le',
-      surname: 'Rykhtorov',
-      age: 19,
-      isCap: false,
-      teamId: 2
-    },
-    {
-      id: 10,
-      name: 'Vladislav',
-      nikname: 'nafany',
-      surname: 'Gorshkov',
-      age: 20,
-      isCap: true,
-      teamId: 2
-    },
-  ];
-
-  constructor(private cookieService: CookieService) {
+  setToken(token: string) {
+    this.cookieService.set('token', token);
+    this.token = token;
   }
 
   getUser() {
@@ -156,39 +77,85 @@ export class DataGetterService {
     return this.users.indexOf(name) !== -1;
   }
 
-  getTeams(): Observable<Team[]> {
-    return of(this.teams);
+  getRoles() {
+    return this.http.get<any>(this.baseUrl + '?action=get_roles&token=' + this.token);
   }
 
-  getTeam(teamId: number): Team {
-    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    return this.teams.filter(function(val) {
-      return val.id === teamId;
-    })[0];
+  getUsers() {
+    return this.http.get<any>(this.baseUrl + '?action=get_users&token=' + this.token);
   }
 
-  addTeam(team: Team) {
-    team.id = this.teams.length + 1;
-    this.teams.push(team);
+  getUserDb(username) {
+    return this.http.get<any>(this.baseUrl + `?action=get_user&user=${username}&token=${this.token}`);
   }
 
-  deleteTeam(index) {
-    this.teams.splice(index, 1);
+  editUser(user) {
+    console.log(user);
+    return this.http.post<any>(this.baseUrl + '?action=edit_user&token=' + this.token, user);
   }
 
-  getPlayer(teamId: number): Observable<any[]> {
-    return of(this.players.filter(elem => elem.teamId === teamId));
+  addUser(username, password) {
+    const user: { password: any; roleId: number; username: any } = {
+      password,
+      roleId: 2,
+      username,
+    };
+    return this.http.post<any>(this.baseUrl + '?action=add_user&token=' + this.token, user);
   }
 
-  addPlayer(player: Player) {
-    player.id = this.players.length + 1;
-    this.players.push(player);
+  deleteUser(user) {
+    return this.http.post<any>(this.baseUrl + '?action=delete_user&token=' + this.token, user);
   }
 
-  deletePlayer(index) {
-    const elemId = this.players.findIndex(n => n.id === index);
-    if (elemId !== -1) {
-      this.players.splice(elemId, 1);
+  /*
+  |--------------------------------------------------------------------------
+  | Teams
+  |--------------------------------------------------------------------------
+  */
+  getTeams() {
+    return this.http.get<any>(this.baseUrl + '?action=get_teams&token=' + this.token);
+  }
+
+  getTeam(id) {
+    return this.http.get<any>(this.baseUrl + `?action=get_team&team=${id}&token=${this.token}`);
+  }
+
+  editTeam(team) {
+    return this.http.post<any>(this.baseUrl + '?action=edit_team&token=' + this.token, team);
+  }
+
+  addTeam(team) {
+    return this.http.post<any>(this.baseUrl + '?action=add_team&token=' + this.token, team);
+  }
+
+  deleteTeam(team) {
+    return this.http.post<any>(this.baseUrl + '?action=delete_team&token=' + this.token, team);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Players
+  |--------------------------------------------------------------------------
+  */
+  getPlayers(teamId) {
+    return this.http.get<any>(this.baseUrl + `?action=get_players&team=${teamId}` + `&token=${this.token}`);
+  }
+
+  editPlayer(player) {
+    player.isCap = player.isCap.toString();
+    return this.http.post<any>(this.baseUrl + '?action=edit_player&token=' + this.token, player);
+  }
+
+  addPlayer(player, id) {
+    player.teamId = id;
+    if (player.isCap == null) {
+      player.isCap = false;
     }
+    player.isCap = player.isCap.toString();
+    return this.http.post<any>(this.baseUrl + '?action=add_player&token=' + this.token, player);
+  }
+
+  deletePlayer(player) {
+    return this.http.post<any>(this.baseUrl + '?action=delete_player&token=' + this.token, player);
   }
 }

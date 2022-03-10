@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {DataGetterService, Team} from "../service/data-getter.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DataExchangerService} from "../service/data-exchanger.service";
+import {DataGetterService, Team, User} from '../service/data-getter.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataExchangerService} from '../service/data-exchanger.service';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +11,11 @@ import {DataExchangerService} from "../service/data-exchanger.service";
 export class HomePage {
   teams: Team[];
   userName: string;
+  role: any;
 
   showNew = false;
   showEdit = -1;
+  permissions: string[];
 
   extraData: string;
 
@@ -25,19 +27,35 @@ export class HomePage {
     this.dataGetter.getTeams().subscribe((data) => {
       this.teams = data;
     });
+
     this.userName = this.dataGetter.getUser();
+
+    this.dataGetter.getUserDb(this.userName).subscribe(data => {
+      this.dataGetter.getRoles().subscribe(res => {
+        for (const i of res) {
+          if (i.id === data[0].roleId) {
+            const perm = i.permissions;
+            this.permissions = perm.split(';');
+          }
+        }
+      });
+    });
+  }
+
+  hasAccess(permission: string) {
+    return this.permissions.indexOf(permission) !== -1;
   }
 
   add() {
     this.showNew = true;
   }
 
-  delete(index: number) {
-    this.dataGetter.deleteTeam(index);
+  delete(team) {
+    this.dataGetter.deleteTeam(team).subscribe(res => this.dataGetter.getTeams().subscribe(data => this.teams = data));
   }
 
   addTeam(team) {
-    this.dataGetter.addTeam(team);
+    this.dataGetter.addTeam(team).subscribe(res => this.dataGetter.getTeams().subscribe(data => this.teams = data));
     this.showNew = false;
   }
 

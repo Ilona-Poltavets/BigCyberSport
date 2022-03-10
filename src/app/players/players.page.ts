@@ -10,32 +10,34 @@ import {ActivatedRoute} from "@angular/router";
 export class PlayersPage implements OnInit {
   teamId: number;
   players: any[];
-  team: Team;
+  teamName: string;
 
   showNew = false;
   showEdit = -1;
 
   constructor(private dataGetter: DataGetterService, private route: ActivatedRoute) {
+    this.teamId = +this.route.snapshot.paramMap.get('id');
+    this.dataGetter.getTeam(this.teamId).subscribe(data => {
+      this.teamName = data[0].name;
+    });
   }
 
   ngOnInit() {
-    this.teamId = +this.route.snapshot.paramMap.get('teamID');
-    this.dataGetter.getPlayer(this.teamId).subscribe(data => {
+    this.dataGetter.getPlayers(this.teamId).subscribe(data => {
       this.players = data;
     });
-    this.team = this.dataGetter.getTeam(this.teamId);
   }
 
   add() {
     this.showNew = true;
   }
 
-  delete(index: number) {
-    this.dataGetter.deletePlayer(index);
+  delete(player) {
+    this.dataGetter.deletePlayer(player).subscribe(res => this.dataGetter.getPlayers(this.teamId).subscribe(data => this.players = data));
   }
 
   addPlayer(player) {
-    this.dataGetter.addPlayer(player);
+    this.dataGetter.addPlayer(player, this.teamId).subscribe(res => this.dataGetter.getPlayers(this.teamId).subscribe(data => this.players = data));
     this.showNew = false;
   }
 }

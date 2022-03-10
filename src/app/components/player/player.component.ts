@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Player} from '../../service/data-getter.service';
+import {DataGetterService, Player} from '../../service/data-getter.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -12,9 +12,10 @@ export class PlayerComponent implements OnInit {
   @Input() isNew: boolean;
   @Output() addPlayer = new EventEmitter();
   @Output() cancelAddingPlayer = new EventEmitter();
+  @Output() cancelEditingPlayer = new EventEmitter();
   title: string;
 
-  constructor(private route: ActivatedRoute,) {
+  constructor(private route: ActivatedRoute, private dataGetter: DataGetterService) {
   }
 
   ngOnInit() {
@@ -39,9 +40,16 @@ export class PlayerComponent implements OnInit {
     }
   }
 
+  savePlayer() {
+    this.dataGetter.editPlayer(this.player).subscribe(data => console.log(data));
+  }
+
   cancelAdding() {
     if (this.isNew) {
       this.cancelAddingPlayer.emit();
+    }
+    if (!this.isNew) {
+      this.cancelEditingPlayer.emit();
     }
   }
 

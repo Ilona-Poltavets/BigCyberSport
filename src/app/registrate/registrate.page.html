@@ -1,7 +1,6 @@
-<script src="login.page.ts"></script>
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +9,7 @@
     <ion-row color="primary" justify-content-center>
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <div text-center>
-          <h3>LOGIN</h3>
+          <h3>REGISTRATION</h3>
         </div>
         <ion-item>
           <ion-label position="floating">
@@ -24,12 +23,15 @@
           </ion-label>
           <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
-        <ion-button color="success" class="ion-float-left" routerLink="/registrate" routerDirection="root">
-          registrate
-        </ion-button>
-        <ion-button color="primary" class="ion-float-right" (click)="login()">
+        <ion-item>
+          <ion-label position="floating">
+            Confirm password
+          </ion-label>
+          <ion-input type="password" [(ngModel)]="confirm_password"></ion-input>
+        </ion-item>
+        <ion-button color="primary" class="ion-float-right" (click)="registrate()">
           <ion-icon slot="start" name="log-in"></ion-icon>
-          login
+          registrate
         </ion-button>
       </ion-col>
     </ion-row>

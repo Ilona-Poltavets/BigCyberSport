@@ -24,7 +24,11 @@
       <ion-icon slot="start" name="add-circle"></ion-icon>
       Add
     </ion-button>
-    <ion-button *ngIf="isNew" color="danger" class="ion-float-right" (click)="cancelAdding()">
+    <ion-button *ngIf="!isNew" color="primary" (click)="saveTeam()">
+      <ion-icon slot="start" name="save"></ion-icon>
+      Save
+    </ion-button>
+    <ion-button color="danger" class="ion-float-right" (click)="cancelAdding()">
       <ion-icon slot="start" name="close"></ion-icon>
       Cancel
     </ion-button>

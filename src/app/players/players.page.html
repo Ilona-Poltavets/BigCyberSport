@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Players {{team.name}}</ion-title>
+    <ion-title>Players {{teamName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,19 +25,20 @@
             <ion-icon name="create"></ion-icon>
             Edit
           </ion-item-option>
-          <ion-item-option color="danger" (click)="delete(player.id)">
+          <ion-item-option color="danger" (click)="delete(player)">
             <ion-icon name="trash"></ion-icon>
             Delete
           </ion-item-option>
         </ion-item-options>
 
         <ion-item (click)="showEdit=-1">
-          <ion-icon [name]="player.isCap===true ? 'star' : 'shield'"></ion-icon>
+          <ion-icon [name]="player.isCap==='true' ? 'star' : 'shield'"></ion-icon>
           <ion-label text-wrap>{{player.name}} "{{player.nikname}}" {{player.surname}}</ion-label>
           <ion-note slot="end">{{player.age}}</ion-note>
         </ion-item>
       </ion-item-sliding>
-      <app-player *ngIf="showEdit===i" [isNew]="false" [player]="player"></app-player>
+      <app-player *ngIf="showEdit===i" [isNew]="false" [player]="player"
+                  (cancelEditingPlayer)="showEdit=false"></app-player>
     </div>
   </ion-list>
 </ion-content>
