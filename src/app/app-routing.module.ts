@@ -27,14 +27,6 @@ const routes: Routes = [
   {
     path: 'data-sender',
     loadChildren: () => import('./data-sender/data-sender.module').then(m => m.DataSenderPageModule)
-  },
-  {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
-  },
-  {
-    path: 'registrate',
-    loadChildren: () => import('./registrate/registrate.module').then( m => m.RegistratePageModule)
   }
 ];
 
