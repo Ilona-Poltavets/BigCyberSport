@@ -29,22 +29,11 @@ export class HomePage {
     });
 
     this.userName = this.dataGetter.getUser();
-
-    this.dataGetter.getUserDb(this.userName).subscribe(data => {
-      this.dataGetter.getRoles().subscribe(res => {
-        for (const i of res) {
-          if (i.id === data[0].roleId) {
-            const perm = i.permissions;
-            this.permissions = perm.split(';');
-          }
-        }
-      });
-    });
   }
 
-  hasAccess(permission: string) {
-    return this.permissions.indexOf(permission) !== -1;
-  }
+  //hasAccess(permission: string) {
+  // return this.permissions.indexOf(permission) !== -1;
+  //}
 
   add() {
     this.showNew = true;
