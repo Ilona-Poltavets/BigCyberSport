@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DataGetterService, Team} from "../../service/data-getter.service";
+import {FireDataGetterService} from "../../service/fire-data-getter.service";
 
 @Component({
   selector: 'app-team',
@@ -15,7 +16,7 @@ export class TeamComponent implements OnInit {
   @Output() cancelEditingTeam = new EventEmitter();
   title: string;
 
-  constructor(private dataGetter: DataGetterService) {
+  constructor(private dataGetter: DataGetterService, private fireData: FireDataGetterService) {
   }
 
   ngOnInit() {
@@ -38,7 +39,7 @@ export class TeamComponent implements OnInit {
   }
 
   saveTeam() {
-    this.dataGetter.editTeam(this.team).subscribe(data => console.log(data));
+    this.fireData.editTeam(this.team);
   }
 
   cancelAdding() {

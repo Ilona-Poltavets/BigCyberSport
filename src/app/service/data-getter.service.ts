@@ -4,7 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {HttpClient} from '@angular/common/http';
 
 export interface Team {
-  id: number;
+  id: string;
   name: string;
   discipline: string;
   coach: string;
@@ -12,13 +12,12 @@ export interface Team {
 }
 
 export interface Player {
-  id: number;
+  id: string;
   name: string;
   nikname: string;
   surname: string;
   age: number;
   isCap: boolean;
-  teamId: number;
 }
 
 export interface User {

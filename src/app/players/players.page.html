@@ -16,7 +16,7 @@
         Add
       </ion-button>
     </ion-list-header>
-    <app-player (addPlayer)="addPlayer($event)" (cancelAddingPlayer)="showNew=false" *ngIf="showNew"
+    <app-player  (cancelAddingPlayer)="showNew=false" *ngIf="showNew"
                 [isNew]="true"></app-player>
     <div *ngFor="let player of players; let i=index">
       <ion-item-sliding>
@@ -32,7 +32,7 @@
         </ion-item-options>
 
         <ion-item (click)="showEdit=-1">
-          <ion-icon [name]="player.isCap==='true' ? 'star' : 'shield'"></ion-icon>
+          <ion-icon [name]="player.isCap===true ? 'star' : 'shield'"></ion-icon>
           <ion-label text-wrap>{{player.name}} "{{player.nikname}}" {{player.surname}}</ion-label>
           <ion-note slot="end">{{player.age}}</ion-note>
         </ion-item>

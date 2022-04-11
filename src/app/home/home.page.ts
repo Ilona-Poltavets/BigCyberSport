@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {DataGetterService, Team, User} from '../service/data-getter.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataExchangerService} from '../service/data-exchanger.service';
+import {FireDataGetterService} from "../service/fire-data-getter.service";
 
 @Component({
   selector: 'app-home',
@@ -22,11 +23,13 @@ export class HomePage {
   constructor(private dataGetter: DataGetterService,
               private router: Router,
               private route: ActivatedRoute,
-              private dataExchanger: DataExchangerService) {
+              private dataExchanger: DataExchangerService,
+              private fireData: FireDataGetterService) {
     this.extraData = this.dataExchanger.getData();
-    this.dataGetter.getTeams().subscribe((data) => {
-      this.teams = data;
-    });
+
+    this.fireData.getTeams().subscribe(
+      data => this.teams = data
+    )
 
     this.userName = this.dataGetter.getUser();
   }
@@ -40,11 +43,11 @@ export class HomePage {
   }
 
   delete(team) {
-    this.dataGetter.deleteTeam(team).subscribe(res => this.dataGetter.getTeams().subscribe(data => this.teams = data));
+    this.fireData.deleteTeam(team);
   }
 
   addTeam(team) {
-    this.dataGetter.addTeam(team).subscribe(res => this.dataGetter.getTeams().subscribe(data => this.teams = data));
+    this.fireData.addTeam(team);
     this.showNew = false;
   }
 

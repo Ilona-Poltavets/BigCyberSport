@@ -17,6 +17,8 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.dataGetter.setUser('FakeUser');
+    this.router.navigate(['/home']);
   }
 
   login() {

@@ -27,7 +27,6 @@ export class PlayerComponent implements OnInit {
         surname: '',
         age: null,
         isCap: null,
-        teamId: null
       };
       this.title = 'Add player';
     }
@@ -35,7 +34,6 @@ export class PlayerComponent implements OnInit {
 
   addNew() {
     if (this.isNew) {
-      this.player.teamId = +this.route.snapshot.paramMap.get('teamID');
       this.addPlayer.emit(this.player);
     }
   }
