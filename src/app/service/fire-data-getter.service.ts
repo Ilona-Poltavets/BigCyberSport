@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {map} from "rxjs/operators";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,9 @@ import {map} from "rxjs/operators";
 export class FireDataGetterService {
 
   teams: Observable<any[]>;
+  private userName = '';
 
-  constructor(private readonly afs: AngularFirestore) {
+  constructor(private readonly afs: AngularFirestore, private afAuth: AngularFireAuth) {
     const teamsCollections = afs.collection('teams');
     this.teams = teamsCollections.snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -20,6 +22,33 @@ export class FireDataGetterService {
       }))
     );
   }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Auth
+  |--------------------------------------------------------------------------
+  */
+
+  checkUser(user) {
+    return this.afAuth.signInWithEmailAndPassword(
+      user.username,
+      user.password,
+    );
+  }
+
+  getUser() {
+    return this.userName;
+  }
+
+  setUser(name: string) {
+    this.userName = name;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Teams
+  |--------------------------------------------------------------------------
+  */
 
   getTeams() {
     return this.teams;
@@ -51,6 +80,12 @@ export class FireDataGetterService {
       .doc('teams/' + team.id)
       .delete();
   }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Players
+  |--------------------------------------------------------------------------
+  */
 
   getPlayers(id) {
     return this.afs.doc('teams/' + id).collection('players').valueChanges();

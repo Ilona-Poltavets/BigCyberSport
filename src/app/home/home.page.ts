@@ -29,14 +29,10 @@ export class HomePage {
 
     this.fireData.getTeams().subscribe(
       data => this.teams = data
-    )
+    );
 
-    this.userName = this.dataGetter.getUser();
+    this.userName = this.fireData.getUser();
   }
-
-  //hasAccess(permission: string) {
-  // return this.permissions.indexOf(permission) !== -1;
-  //}
 
   add() {
     this.showNew = true;

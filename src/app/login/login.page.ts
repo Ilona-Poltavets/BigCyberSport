@@ -3,6 +3,7 @@ import {DataGetterService} from "../service/data-getter.service";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {AuthGuard} from "../guards/auth.guard";
+import {FireDataGetterService} from "../service/fire-data-getter.service";
 
 @Component({
   selector: 'app-login',
@@ -13,31 +14,24 @@ export class LoginPage implements OnInit {
   userName: string;
   password: string;
 
-  constructor(private router: Router, private dataGetter: DataGetterService, public alertController: AlertController) {
+  constructor(private router: Router, private fireData: FireDataGetterService, public alertController: AlertController) {
   }
 
   ngOnInit() {
-    this.dataGetter.setUser('FakeUser');
-    this.router.navigate(['/home']);
   }
 
   login() {
-    this.dataGetter.checkUser({
+    this.fireData.checkUser({
       username: this.userName,
       password: this.password
-    }).subscribe(
-      result => {
-        if (result.hasOwnProperty('error')) {
-          this.userNotExistAlert(result.error);
-        } else {
-          if (result.hasOwnProperty('token')) {
-            this.dataGetter.setUser(this.userName);
-            this.dataGetter.setToken(result.token);
-            this.router.navigate(['/home']);
-          } else {
-            this.userNotExistAlert('Unexpected error');
-          }
-        }
+    }).then(
+      res => {
+        this.fireData.setUser(this.userName);
+        this.router.navigate(['/home']);
+      },
+      err => {
+        this.userNotExistAlert(err.message);
+        console.log(err);
       }
     );
   }

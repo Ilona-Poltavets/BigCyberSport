@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFirestore, AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,8 @@ import {AngularFirestore, AngularFirestoreModule} from "@angular/fire/compat/fir
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
-    AngularFirestore
+    AngularFirestore,
+    AngularFireAuth
   ],
   bootstrap: [AppComponent],
 })
