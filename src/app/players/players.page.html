@@ -16,7 +16,7 @@
         Add
       </ion-button>
     </ion-list-header>
-    <app-player  (cancelAddingPlayer)="showNew=false" *ngIf="showNew"
+    <app-player (addPlayer)="addPlayer($event)" (cancelAddingPlayer)="showNew=false" *ngIf="showNew"
                 [isNew]="true"></app-player>
     <div *ngFor="let player of players; let i=index">
       <ion-item-sliding>
@@ -38,7 +38,7 @@
         </ion-item>
       </ion-item-sliding>
       <app-player *ngIf="showEdit===i" [isNew]="false" [player]="player"
-                  (cancelEditingPlayer)="showEdit=false"></app-player>
+                  (cancelEditingPlayer)="showEdit=false" [teamId]="teamId"></app-player>
     </div>
   </ion-list>
 </ion-content>

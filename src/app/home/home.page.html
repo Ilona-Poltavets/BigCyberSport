@@ -44,7 +44,7 @@
           <ion-note slot="end">{{team.coach}}</ion-note>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="secondary" [routerLink]="['/players/'+team.name, {id:team.id}]"
+          <ion-item-option color="secondary" [routerLink]="['/players/', {name:team.name,id:team.id}]"
                            routerDirection="forward">
             <ion-icon name="reorder"></ion-icon>
             Players

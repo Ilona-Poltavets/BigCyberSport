@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DataGetterService, Player} from '../../service/data-getter.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FireDataGetterService} from "../../service/fire-data-getter.service";
 
 @Component({
   selector: 'app-player',
@@ -8,14 +9,16 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
+
   @Input() player: Player;
   @Input() isNew: boolean;
+  @Input() teamId: string;
   @Output() addPlayer = new EventEmitter();
   @Output() cancelAddingPlayer = new EventEmitter();
   @Output() cancelEditingPlayer = new EventEmitter();
   title: string;
 
-  constructor(private route: ActivatedRoute, private dataGetter: DataGetterService) {
+  constructor(private route: ActivatedRoute, private fireData: FireDataGetterService) {
   }
 
   ngOnInit() {
@@ -39,7 +42,8 @@ export class PlayerComponent implements OnInit {
   }
 
   savePlayer() {
-    this.dataGetter.editPlayer(this.player).subscribe(data => console.log(data));
+    console.log(this.player);
+    this.fireData.editPlayer(this.player, this.teamId);
   }
 
   cancelAdding() {
@@ -50,5 +54,4 @@ export class PlayerComponent implements OnInit {
       this.cancelEditingPlayer.emit();
     }
   }
-
 }

@@ -16,17 +16,15 @@ export class PlayersPage implements OnInit {
   showNew = false;
   showEdit = -1;
 
-  constructor(private dataGetter: DataGetterService, private route: ActivatedRoute, private fireData:FireDataGetterService) {
+  constructor(private dataGetter: DataGetterService, private route: ActivatedRoute, private fireData: FireDataGetterService) {
     this.teamId = this.route.snapshot.paramMap.get('id');
-    //this.fireData.getTeam(this.teamId).subscribe(data => {
-    //  this.teamName = data[0].name;
-    //});
-  }
-
-  ngOnInit() {
+    this.teamName=this.route.snapshot.paramMap.get('name');
     this.fireData.getPlayers(this.teamId).subscribe(data => {
       this.players = data;
     });
+  }
+
+  ngOnInit() {
   }
 
   add() {
@@ -34,11 +32,11 @@ export class PlayersPage implements OnInit {
   }
 
   delete(player) {
-    this.dataGetter.deletePlayer(player).subscribe(res => this.dataGetter.getPlayers(this.teamId).subscribe(data => this.players = data));
+    this.fireData.deletePlayer(player, this.teamId);
   }
 
-  //addPlayer(player) {
-  //  this.dataGetter.addPlayer(player, this.teamId).subscribe(res => this.dataGetter.getPlayers(this.teamId).subscribe(data => this.players = data));
-  //  this.showNew = false;
-  //}
+  addPlayer(player) {
+    this.fireData.addPlayer(player, this.teamId);
+    this.showNew = false;
+  }
 }

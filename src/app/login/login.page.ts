@@ -18,6 +18,8 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    //this.fireData.setUser('test');
+    //this.router.navigate(['/home']);
   }
 
   login() {

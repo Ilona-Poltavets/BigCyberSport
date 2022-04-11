@@ -10,6 +10,8 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 export class FireDataGetterService {
 
   teams: Observable<any[]>;
+  players: Observable<any[]>;
+
   private userName = '';
 
   constructor(private readonly afs: AngularFirestore, private afAuth: AngularFireAuth) {
@@ -54,6 +56,12 @@ export class FireDataGetterService {
     return this.teams;
   }
 
+  getTeam(teamId) {
+    return this.afs
+      .collection('teams/' + teamId)
+      .doc(teamId).get();
+  }
+
   editTeam(team) {
     return this.afs
       .doc('teams/' + team.id)
@@ -87,8 +95,47 @@ export class FireDataGetterService {
   |--------------------------------------------------------------------------
   */
 
-  getPlayers(id) {
-    return this.afs.doc('teams/' + id).collection('players').valueChanges();
+  getPlayers(teamId) {
+    return this.afs.doc('teams/' + teamId).collection('players').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return {id, ...(data as object)};
+      }))
+    );
   }
 
+  editPlayer(player, teamId) {
+    return this.afs
+      .doc('teams/' + teamId + '/players/' + player.id)
+      .update({
+        name: player.name,
+        nikname: player.nikname,
+        surname: player.surname,
+        age: player.age,
+        isCap: player.isCap
+      });
+  }
+
+  addPlayer(player, teamId) {
+    return this.afs.doc('teams/' + teamId).collection('players')
+      .add(
+        {
+          name: player.name,
+          nikname: player.nikname,
+          surname: player.surname,
+          age: player.age,
+          isCap: player.isCap
+        })
+      .then(() => {
+        console.log('Player Created successfully!');
+      })
+      .catch(error => {
+        console.error('Error writing document: ', error);
+      });
+  }
+
+  deletePlayer(player, teamId) {
+    return this.afs.doc('teams/' + teamId + '/players/' + player.id).delete();
+  }
 }
